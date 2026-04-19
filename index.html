@@ -1,1 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shilpi — Educator Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --cream: #f7f3ec;
+    --ink: #1e1a14;
+    --ink-soft: #4a4540;
+    --ink-muted: #8a847c;
+    --forest: #2d4a3e;
+    --forest-light: #3d6454;
+    --amber: #c07a2f;
+    --amber-pale: #f0e0c8;
+    --border: rgba(30,26,20,0.12);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─────────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(247,243,236,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--forest); }
+
+  /* ─── HERO ────────────────────────────────────────────── */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 10vw 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-ornament {
+    position: absolute;
+    top: 80px; right: 8vw;
+    width: 340px;
+    height: 340px;
+    opacity: 0.055;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--amber);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 0.2em;
+  }
+
+  h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--forest);
+  }
+
+  .hero-tagline {
+    margin-top: 2rem;
+    max-width: 520px;
+    font-family: var(--serif);
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    padding-left: 1.2rem;
+    border-left: 2px solid var(--amber);
+  }
+
+  .hero-cta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.7em 1.8em;
+    background: var(--forest);
+    color: #e8f0ec;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--forest-light); transform: translateY(-1px); }
+
+  .btn-ghost {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .btn-ghost:hover { color: var(--forest); border-color: var(--forest); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: var(--ink-muted);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--ink-muted), transparent);
+    animation: scrollPulse 2.2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* ─── SECTION COMMON ──────────────────────────────────── */
+  section {
+    padding: 110px 10vw;
+  }
+
+  .section-label {
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--amber);
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0;
+  }
+
+  h2 em {
+    font-style: italic;
+    color: var(--forest);
+  }
+
+  /* ─── ABOUT ───────────────────────────────────────────── */
+  #about {
+    background: var(--forest);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #about .section-label { color: var(--amber); }
+  #about .section-label::before { background: var(--amber); }
+  #about h2 { color: #e8f0ec; margin-bottom: 2rem; }
+  #about h2 em { color: #a0c8b4; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 240px 1fr 1fr;
+    gap: 4vw;
+    align-items: start;
+    margin-top: 3.5rem;
+  }
+
+  .about-text p {
+    color: rgba(232,240,236,0.82);
+    font-size: 1rem;
+    line-height: 1.85;
+    margin-bottom: 1.2rem;
+  }
+
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .about-quote {
+    background: rgba(255,255,255,0.06);
+    border-left: 2px solid var(--amber);
+    padding: 1.8rem 1.8rem 1.8rem 2rem;
+    margin-top: 0;
+    position: sticky;
+    top: 80px;
+  }
+
+  .about-quote blockquote {
+    font-family: var(--serif);
+    font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+    font-style: italic;
+    font-weight: 300;
+    color: #e8f0ec;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+  }
+
+  .about-pillars {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .pillar {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: rgba(232,240,236,0.7);
+  }
+
+  .pillar-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--amber);
+    flex-shrink: 0;
+  }
+
+  .about-bg-text {
+    position: absolute;
+    bottom: -1rem;
+    right: 8vw;
+    font-family: var(--serif);
+    font-size: 18vw;
+    font-weight: 300;
+    color: rgba(255,255,255,0.025);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.05em;
+  }
+
+  /* ─── PROJECTS ────────────────────────────────────────── */
+  #projects {
+    background: var(--cream);
+  }
+
+  .projects-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .projects-count {
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1.5px solid var(--border);
+  }
+
+  .project-card {
+    background: var(--cream);
+    padding: 2.5rem;
+    position: relative;
+    transition: background 0.25s;
+    cursor: default;
+  }
+
+  .project-card:hover { background: #f0ede5; }
+
+  .project-num {
+    font-family: var(--serif);
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: rgba(30,26,20,0.06);
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.03em;
+  }
+
+  .project-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--amber);
+    background: var(--amber-pale);
+    padding: 0.3em 0.8em;
+    margin-bottom: 1rem;
+  }
+
+  .project-card h3 {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .project-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .project-points li {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .project-points li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--amber);
+    font-size: 0.7rem;
+    top: 0.1em;
+  }
+
+  .project-tools {
+    margin-top: 1.4rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tool-chip {
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--forest);
+    border: 1px solid rgba(45,74,62,0.25);
+    padding: 0.25em 0.7em;
+  }
+
+  /* ─── FOOTER ──────────────────────────────────────────── */
+  footer {
+    background: var(--ink);
+    padding: 3.5rem 10vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  footer .f-name {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: #f0ebe0;
+    letter-spacing: 0.02em;
+  }
+
+  footer .f-tagline {
+    font-size: 0.75rem;
+    color: rgba(240,235,224,0.45);
+    letter-spacing: 0.1em;
+    margin-top: 0.3rem;
+  }
+
+  footer .f-right {
+    text-align: right;
+  }
+
+  footer .f-right p {
+    font-size: 0.72rem;
+    color: rgba(240,235,224,0.35);
+    letter-spacing: 0.08em;
+  }
+
+  /* ─── ANIMATIONS ──────────────────────────────────────── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 5vw; }
+    .nav-links { gap: 1.4rem; }
+    #home { padding: 100px 6vw 70px; }
+    section { padding: 80px 6vw; }
+    .about-grid { grid-template-columns: 1fr; } .about-photo { max-width: 100%; }
+    .about-quote { position: static; }
+    .project-grid { grid-template-columns: 1fr; }
+    .projects-header { flex-direction: column; align-items: flex-start; }
+    footer { flex-direction: column; align-items: flex-start; }
+    footer .f-right { text-align: left; }
+  }
+
+  .about-photo-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .about-photo {
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: grayscale(15%);
+  }
+
+  .about-photo-frame {
+    position: relative;
+    display: inline-block;
+  }
+
+  .about-photo-frame::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 100%;
+    height: 100%;
+    border: 1.5px solid rgba(192,122,47,0.4);
+    pointer-events: none;
+  }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home" class="nav-logo">Shilpi</a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────────────── -->
+<section id="home">
+  <svg class="hero-ornament" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="170" cy="170" r="160" stroke="#1e1a14" stroke-width="1"/>
+    <circle cx="170" cy="170" r="120" stroke="#1e1a14" stroke-width="0.5"/>
+    <circle cx="170" cy="170" r="80" stroke="#1e1a14" stroke-width="0.5"/>
+    <line x1="10" y1="170" x2="330" y2="170" stroke="#1e1a14" stroke-width="0.5"/>
+    <line x1="170" y1="10" x2="170" y2="330" stroke="#1e1a14" stroke-width="0.5"/>
+    <line x1="57" y1="57" x2="283" y2="283" stroke="#1e1a14" stroke-width="0.3"/>
+    <line x1="283" y1="57" x2="57" y2="283" stroke="#1e1a14" stroke-width="0.3"/>
+  </svg>
+
+  <div class="hero-eyebrow">Portfolio</div>
+  <h1>Hi, I am<br><em>Shilpi.</em></h1>
+
+  <p class="hero-tagline fade-in">
+    An educator in the making — driven to inspire, empower, and transform young minds.
+  </p>
+
+  <div class="hero-cta fade-in">
+    <a href="#projects" class="btn-primary">View my work</a>
+    <a href="#about" class="btn-ghost">Learn more about me</a>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─────────────────────────────────────────────── -->
+<section id="about">
+  <div class="about-bg-text" aria-hidden="true">teach</div>
+  <div class="section-label">About me</div>
+  <h2>A future <em>educator,</em><br>rooted in purpose.</h2>
+
+  <div class="about-grid">
+    <div class="about-photo-wrap fade-in">
+      <div class="about-photo-frame">
+        <img src="https://i.ibb.co/9HMJGTrR/Whats-App-Image-2026-04-19-at-21-45-29.jpg" alt="Shilpi standing in a school library" class="about-photo">
+      </div>
+    </div>
+    <div class="about-text fade-in">
+      <p>I am currently pursuing a Bachelor of Education (B.Ed.), building a strong foundation in teaching methodologies, educational psychology, and classroom management.</p>
+      <p>My academic journey has been shaped by a deep belief that education is one of the most powerful tools for personal growth and social development. I am learning to create engaging lesson plans, understand diverse learning needs, and foster active participation among students.</p>
+      <p>I am particularly drawn to building inclusive learning environments — spaces where every student feels seen, valued, and motivated. A good teacher, I believe, does not just impart knowledge; they inspire confidence, creativity, and critical thinking.</p>
+    </div>
+
+    <div class="fade-in">
+      <div class="about-quote">
+        <blockquote>"My goal is to create an inclusive and engaging classroom where every student feels valued and motivated to learn."</blockquote>
+        <div class="about-pillars">
+          <div class="pillar"><span class="pillar-dot"></span> Teaching Methodologies</div>
+          <div class="pillar"><span class="pillar-dot"></span> Educational Psychology</div>
+          <div class="pillar"><span class="pillar-dot"></span> Classroom Management</div>
+          <div class="pillar"><span class="pillar-dot"></span> Inclusive Learning Design</div>
+          <div class="pillar"><span class="pillar-dot"></span> Digital Formative Assessment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS ──────────────────────────────────────────── -->
+<section id="projects">
+  <div class="projects-header fade-in">
+    <div>
+      <div class="section-label">Projects</div>
+      <h2>Selected <em>work.</em></h2>
+    </div>
+    <span class="projects-count">04 projects</span>
+  </div>
+
+  <div class="project-grid">
+
+    <div class="project-card fade-in">
+      <div class="project-num">01</div>
+      <div class="project-tag">English · Prepositions</div>
+      <h3>Interactive English Language Assessment Suite</h3>
+      <ul class="project-points">
+        <li>Designed a "Prepositions Assessment Pack" that progressively builds students' understanding of time, place, and movement prepositions.</li>
+        <li>Transformed the assessment into a game-based Quizalize activity using live leaderboards and timed questions.</li>
+        <li>Created a structured answer key and guide enabling targeted teacher feedback and mastery tracking.</li>
+      </ul>
+      <div class="project-tools">
+        <span class="tool-chip">Quizalize</span>
+        <span class="tool-chip">Game-Based Learning</span>
+        <span class="tool-chip">Formative Assessment</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-num">02</div>
+      <div class="project-tag">English · Adverbs · Grade 7</div>
+      <h3>Adverb Mastery & Digital Formative Evaluation</h3>
+      <ul class="project-points">
+        <li>Developed a Grade 7 English project helping students identify and use different types of adverbs in authentic contexts.</li>
+        <li>Built an auto-graded Google Forms quiz delivering instant feedback on both MCQ and short-answer questions.</li>
+        <li>Analysed post-assessment data to evaluate learning outcomes and the effectiveness of digital tools.</li>
+      </ul>
+      <div class="project-tools">
+        <span class="tool-chip">Google Forms</span>
+        <span class="tool-chip">Auto-Grading</span>
+        <span class="tool-chip">Data Analysis</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-num">03</div>
+      <div class="project-tag">Social Science · Geography</div>
+      <h3>Gamified Geography Revision & Concept Mapping</h3>
+      <ul class="project-points">
+        <li>Designed an interactive "Match-Up" activity on Wordwall for the topic "Climates of India."</li>
+        <li>Created materials to help students distinguish between weather vs. climate and latitude vs. altitude.</li>
+        <li>Used visual matching and concept mapping to support varied learning styles and deepen understanding of India's climatic regions.</li>
+      </ul>
+      <div class="project-tools">
+        <span class="tool-chip">Wordwall</span>
+        <span class="tool-chip">Concept Mapping</span>
+        <span class="tool-chip">Visual Learning</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-num">04</div>
+      <div class="project-tag">Social Science · Summative</div>
+      <h3>Comprehensive Social Science Summative Assessment</h3>
+      <ul class="project-points">
+        <li>Designed a 60-minute, 20-mark written exam assessing students' understanding of India's climatic patterns.</li>
+        <li>Included a map-based section requiring students to locate places like Mawsynram and the Thar Desert.</li>
+        <li>Developed clear rubrics for evaluating written explanations, particularly around the Himalayan influence on Northern India's climate.</li>
+      </ul>
+      <div class="project-tools">
+        <span class="tool-chip">Rubric Design</span>
+        <span class="tool-chip">Summative Assessment</span>
+        <span class="tool-chip">Spatial Learning</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────── -->
+<footer>
+  <div>
+    <div class="f-name">Shilpi</div>
+    <div class="f-tagline">Educator in the making &nbsp;·&nbsp; B.Ed. Candidate</div>
+  </div>
+  <div class="f-right">
+    <p>Portfolio &nbsp;·&nbsp; 2025</p>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
